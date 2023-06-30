@@ -48,7 +48,15 @@ const UserSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
-}, {timestamps: true,});
+}, {timestamps: true,toJSON: {virtuals: true}, toObject: {virtuals: true}});
+
+// Popolute Posts That Belongs To This User When he/she Get his/her Profile
+
+UserSchema.virtual('posts', {
+    ref: 'Post',
+    foreignField: 'user',
+    localField: '_id',
+})
 
 // Generate Auth Token
 UserSchema.methods.generateAuthToken = function() {

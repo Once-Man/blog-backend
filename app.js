@@ -17,6 +17,7 @@ app.use(express.json());
 app.use('/api/auth', require('./routes/authRoute'));
 app.use('/api/users', require('./routes/userRoute'));
 app.use('/api/posts', require('./routes/postRoute'));
+// app.use('/api/comments', require('./routes/commentRoute'));
 
 //running the server
 app.listen(process.env.PORT, () => {

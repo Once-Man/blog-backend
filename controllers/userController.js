@@ -12,7 +12,7 @@ module.exports.getAllUserCtrl = asynHandler(async(req, res) => {
 
 module.exports.getUserProfileCtrl = asynHandler(async(req, res) => {
     const user_id = req.params.id;
-    const user = await User.findById({_id: user_id}).select('-password');
+    const user = await User.findById({_id: user_id}).select('-password').populate('posts');
     if(!user){
         return res.status(404).json({message: 'User not found!'});
     }
