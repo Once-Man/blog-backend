@@ -1,7 +1,7 @@
 const express = require('express');
 
 const connectToDb = require('./config/connectToDb');
-
+const {notFound, errorHandler} = require('./middlewares/error');
 require('dotenv').config();
 
 //connection to db
@@ -17,7 +17,12 @@ app.use(express.json());
 app.use('/api/auth', require('./routes/authRoute'));
 app.use('/api/users', require('./routes/userRoute'));
 app.use('/api/posts', require('./routes/postRoute'));
-// app.use('/api/comments', require('./routes/commentRoute'));
+app.use('/api/comments', require('./routes/commentRoute'));
+app.use('/api/categories', require('./routes/categoryRoute'));
+
+// Error Handler Middleware
+app.use(notFound);
+app.use(errorHandler);
 
 //running the server
 app.listen(process.env.PORT, () => {
